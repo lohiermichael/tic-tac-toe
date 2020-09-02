@@ -55,6 +55,13 @@ class Square:
             Circle(window=self.window, center=self.center,
                    radius=int(self.size/4)).draw()
 
+        elif self.state == 'cross':
+            # Draw a cross in the square
+            cross_tl = (self.tl_x + int(self.size/4),
+                        self.tl_y + int(self.size/4))
+            Cross(window=self.window, tl=cross_tl,
+                  size=int(self.size/2)).draw()
+
 
 class Grid(list):
     def __init__(self, window, big_square: Square = None, color=BLACK):
@@ -119,6 +126,39 @@ class Circle:
         self.radius = radius
         self.color = color
 
-    def draw(self, line_width=2):
+    def draw(self, line_width=1):
         pygame.draw.circle(self.window, self.color,
                            self.center, self.radius, line_width)
+
+
+class Cross:
+    def __init__(self, window, color=BLACK, tl=None, size=None):
+        self.window = window
+        # The size of the square in witch the cross is included
+        self.size = size
+        self.color = color
+
+        # Top left corner
+        self.tl = tl
+        self.tl_x, self.tl_y = self.tl
+
+        # Top right corner
+        self.tr_x = self.tl_x + size
+        self.tr_y = self.tl_y
+        self.tr = self.tr_x, self.tr_y
+
+        # Bottom left corner
+        self.bl_x = self.tl_x
+        self.bl_y = self.tl_y + size
+        self.bl = self.bl_x, self.bl_y
+
+        # Bottom right corner
+        self.br_x = self.tr_x
+        self.br_y = self.tr_y + size
+        self.br = self.br_x, self.br_y
+
+    def draw(self, line_width=1):
+        """Draw two crossing diagonal lines"""
+
+        pygame.draw.line(self.window, self.color, self.tl, self.br, line_width)
+        pygame.draw.line(self.window, self.color, self.tr, self.bl, line_width)

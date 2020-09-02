@@ -31,7 +31,7 @@ while playing:
             for i in range(3):
                 for j in range(3):
                     if grid[i][j].is_clicked(pos_click):
-                        grid[i][j].change_state(new_state='circle')
+                        grid[i][j].change_state(new_state='cross')
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
