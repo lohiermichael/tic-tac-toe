@@ -6,7 +6,6 @@ from player_objects import Player
 from game_object import Game
 from initialize_objects import *
 
-
 pygame.init()
 
 window = initialize_window()
@@ -37,6 +36,17 @@ while game.on:
                         game.playing_player.play(in_grid=grid,
                                                  on_square=(i, j))
                         game.change_playing_player()
+
+    # # End of the game
+
+    # # First: check one player has not won
+    # if grid.is_a_winner() != 'not':
+    #     print(f'{game.playing_player.name} won')
+    #     game.on = False
+
+    # # Second: check if the grid is not full
+    # if grid.is_full():
+    #     game.on = False
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()

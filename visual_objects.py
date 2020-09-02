@@ -63,7 +63,7 @@ class Square:
                   size=int(self.size/2)).draw()
 
 
-class Grid(list):
+class self(list):
     def __init__(self, window, big_square: Square = None, color=BLACK):
         """Build it from the big square that wraps him up
 
@@ -117,6 +117,36 @@ class Grid(list):
                          self[0][0].tr, self[2][0].br, line_width)
         pygame.draw.line(self.window, self.color,
                          self[0][2].tl, self[2][2].bl, line_width)
+
+    def is_full(self):
+        # All the squares are not empty
+        return set(self[i][j].state != 'empty' for i in range(3) for j in range(3)) == {True}
+
+    # def is_a_winner(self) -> str:
+    #     """Tells if the grid has a winner or not
+
+    #     Returns:
+    #         str: if not winner: 'not',
+    #              if winner: 'cross' or 'circle'
+    #     """
+
+    #     # Check rows
+    #     for i in range(3):
+    #         if (self[i][0].state == self[i][1].state == self[i][2].state) and (self[i][0].state != 'empty'):
+    #             return self[i][0].state
+
+    #     # Check columns
+    #     for j in range(3):
+    #         if (self[0][j].state == self[1][j].state == self[2][j].state) and (self[0][j].state != 'empty'):
+    #             return self[0][j].state
+
+    #     # Check diagonals
+    #     if (self[0][0].state == self[1][1].state == self[2][2].state) and (self[1][1].state != 'empty'):
+    #         return self[1][1].state
+    #     if (self[0][2].state == self[1][1].state == self[2][0].state) and (self[0][1].state != 'empty'):
+    #         return self[1][1].state
+
+    #     return 'not'
 
 
 class Circle:
