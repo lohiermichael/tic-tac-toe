@@ -21,16 +21,6 @@ window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_LENGTH))
 window.fill(GREY)
 
 
-def draw_grid():
-    # Horizontal lines
-    pygame.draw.line(window, BLACK, (300, 300), (900, 300), 1)
-    pygame.draw.line(window, BLACK, (300, 500), (900, 500), 1)
-
-    # Vertical lines
-    pygame.draw.line(window, BLACK, (500, 100), (500, 700), 1)
-    pygame.draw.line(window, BLACK, (700, 100), (700, 700), 1)
-
-
 playing = True
 
 
@@ -100,14 +90,18 @@ class Grid(list):
         self.append([square_4, square_5, square_6])
         self.append([square_7, square_8, square_9])
 
-    def draw(self):
+    def draw(self, line_width=1):
         # Horizontal lines
-        pygame.draw.line(self.window, BLACK, self[0][0].bl, self[0][2].br, 1)
-        pygame.draw.line(self.window, BLACK, self[2][0].tl, self[2][2].tr, 1)
+        pygame.draw.line(self.window, BLACK,
+                         self[0][0].bl, self[0][2].br, line_width)
+        pygame.draw.line(self.window, BLACK,
+                         self[2][0].tl, self[2][2].tr, line_width)
 
         # Vertical lines
-        pygame.draw.line(self.window, BLACK, self[0][0].tr, self[2][0].br, 1)
-        pygame.draw.line(self.window, BLACK, self[0][2].tl, self[2][2].bl, 1)
+        pygame.draw.line(self.window, BLACK,
+                         self[0][0].tr, self[2][0].br, line_width)
+        pygame.draw.line(self.window, BLACK,
+                         self[0][2].tl, self[2][2].bl, line_width)
 
 
 big_square = Square(tl=(300, 100), tr=(900, 100))
@@ -117,7 +111,7 @@ grid = Grid(big_square=big_square, window=window)
 # Main loop
 while playing:
 
-    grid.draw()
+    grid.draw(line_width=2)
 
     # an event is a click on the mouth or on the key of the keyboard or else
     for event in pygame.event.get():
