@@ -26,6 +26,34 @@ class View:
         pygame.display.flip()
 
 
+class StartSelectionView(View):
+    def __init__(self):
+        self.active = True
+        self.name = 'start_selection_view'
+
+        self.initializer = Initializer(view_name=self.name)
+
+        self.window = self.initializer.window
+        self.central_start_button = self.initializer.central_start_button
+        self.central_start_button.draw()
+        self.start_game = False
+
+    def _mouse_press(self):
+        if self.central_start_button.is_pressed(self.press_position):
+            self.start_game = True
+            self._quit_window()
+
+    def _main_loop(self):
+        for event in pygame.event.get():
+            self.central_start_button.draw()
+            if event.type == pygame.QUIT:
+                self._quit_window()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.press_position = pygame.mouse.get_pos()
+                self._mouse_press()
+        pygame.display.flip()
+
+
 class MainView(View):
     def __init__(self):
         self.active = True
@@ -41,7 +69,6 @@ class MainView(View):
 
     def _check_click_square(self, i_square, j_square):
         if self.grid[i_square][j_square].is_clicked(self.press_position) and self.grid[i_square][j_square].state == 'empty':
-            print(self.game.playing_player.name)
             # Player plays
             self.game.playing_player.play(in_grid=self.grid,
                                           on_square=(i_square, j_square))
@@ -50,12 +77,13 @@ class MainView(View):
 
             # First: check one player has not won
             if self.grid.there_is_a_winner() != 'not':
-                print(f'{self.game.playing_player.name} won')
+                self.game.won = True
+                self.game.winner = self.game.playing_player
                 self._quit_window()
 
-            # Second: check if the grid is not full
+            # Second: check if the grid is full, in this case the game is tied
             elif self.grid.is_full():
-                print(f'It is a tie')
+                self.game.tied = True
                 self._quit_window()
 
             self.game.change_playing_player()
@@ -84,41 +112,48 @@ class MainView(View):
         pygame.display.flip()
 
 
-class StartSelectionView(View):
-    def __init__(self):
+class FinalView(View):
+    def __init__(self, final_message):
         self.active = True
-        self.name = 'start_selection_view'
+        self.name = 'final_view'
 
-        self.initializer = Initializer(view_name=self.name)
+        self.final_message = final_message
+
+        self.initializer = Initializer(
+            view_name=self.name, final_message=self.final_message)
 
         self.window = self.initializer.window
-        self.central_start_button = self.initializer.central_start_button
-
-        self.start_game = False
-
-    def _mouse_press(self):
-        if self.central_start_button.is_pressed(self.press_position):
-            self.start_game = True
-            self._quit_window()
+        self.final_message = self.initializer.final_message
+        self.final_message.draw()
 
     def _main_loop(self):
         for event in pygame.event.get():
-            self.central_start_button.draw()
+            self.final_message.draw()
             if event.type == pygame.QUIT:
                 self._quit_window()
-            elif event.type == pygame.MOUSEBUTTONUP:
-                self.press_position = pygame.mouse.get_pos()
-                self._mouse_press()
+
         pygame.display.flip()
 
 
 class ViewManager:
     def __init__(self):
         self.set_new_view(new_view=StartSelectionView())
+        self.display_main_view()
+        self.display_final_view()
 
-        if self.current_view.name == 'start_selection_view':
-            if self.current_view.start_game:
-                self.set_new_view(MainView())
+    def display_main_view(self):
+        assert self.current_view.name == 'start_selection_view'
+        if self.current_view.start_game:
+            self.set_new_view(MainView())
+
+    def display_final_view(self):
+        assert self.current_view.name == 'main_view'
+        if self.current_view.game.won:
+            winner_name = self.current_view.game.winner.name
+            self.set_new_view(
+                FinalView(final_message=f'{winner_name} won the game'))
+        elif self.current_view.game.tied:
+            self.set_new_view(FinalView(final_message='It is a tie'))
 
     def set_new_view(self, new_view):
         self.current_view = new_view

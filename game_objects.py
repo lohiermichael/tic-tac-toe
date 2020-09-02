@@ -3,7 +3,6 @@ from player_objects import Player
 
 class Game:
     def __init__(self,
-                 on: bool = True,
                  player_1: Player = None,
                  player_2: Player = None,
                  playing_player: Player = None):
@@ -14,10 +13,13 @@ class Game:
         assert (player_1.playing and not player_2.playing) or (
             player_2.playing and not player_1.playing)
 
-        self.on = on
         self.player_1 = player_1
         self.player_2 = player_2
         self.playing_player = playing_player
+
+        self.won = False
+        self.winner = None
+        self.tied = False
 
     def change_playing_player(self):
 

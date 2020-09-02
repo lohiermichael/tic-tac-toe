@@ -7,19 +7,23 @@ from game_objects import Game
 
 
 class Initializer:
-    def __init__(self, view_name):
+    def __init__(self, view_name, final_message=None):
         self.view_name = view_name
+        self.final_message = final_message
 
         self._initialize_window()
 
         if self.view_name == 'base':
             pass
 
+        elif self.view_name == 'start_selection_view':
+            self._initialize_start_selection_view()
+
         elif self.view_name == 'main_view':
             self._initialize_main_view()
 
-        elif self.view_name == 'start_selection_view':
-            self._initialize_start_selection_view()
+        elif self.view_name == 'final_view':
+            self._initialize_final_view()
 
     def _initialize_window(self):
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_LENGTH))
@@ -50,6 +54,15 @@ class Initializer:
 
     def _initialize_start_selection_view(self):
         self.central_start_button = Button(window=self.window,
+                                           text='Start playing',
                                            center=WINDOW_CENTER,
                                            width=START_BUTTON_WIDTH,
                                            height=START_BUTTON_HEIGHT)
+
+    def _initialize_final_view(self):
+        self.final_message = Button(window=self.window,
+                                    text=self.final_message,
+                                    color=GREY,
+                                    center=WINDOW_CENTER,
+                                    width=FINAL_MESSAGE_WIDTH,
+                                    height=FINAL_MESSAGE_HEIGHT)

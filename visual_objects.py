@@ -194,7 +194,7 @@ class Cross:
 
 
 class Button():
-    def __init__(self, window, color=BLACK, center=None, height=None, width=None):
+    def __init__(self, window, color=BLACK, center=None, height=None, width=None, text=''):
         self.window = window
         self.color = color
 
@@ -207,7 +207,7 @@ class Button():
         self.x = self.center_x - int(self.width/2)
         self.y = self.center_y - int(self.height/2)
 
-        # self.text = text
+        self.text = text
 
     def draw(self, outline=True, outline_depth=2, line_width=1):
         """Call this method to draw a button on the screen"""
@@ -223,13 +223,12 @@ class Button():
                                                    self.width,
                                                    self.height), line_width)
 
-        # if self.text != '':
-        #     text = BUTTON_FONT.render(self.text, line_width, (0, 0, 0))
-        #     self.window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
-        #                             self.y + (self.height/2 - text.get_height()/2)))
+        if self.text != '':
+            text = BUTTON_FONT.render(self.text, line_width, BLACK)
+            self.window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
+                                    self.y + (self.height/2 - text.get_height()/2)))
 
     def is_pressed(self, press_position):
 
         pp_x, pp_y = press_position
-
         return (self.x < pp_x < self.x+self.width) and (self.y < pp_y < self.y+self.height)
