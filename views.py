@@ -7,6 +7,7 @@ class View:
     def __init__(self):
         self.active = True
         self.name = 'base'
+        self.close_window = False
 
         self.initializer = Initializer(view_name=self.name)
 
@@ -22,6 +23,7 @@ class View:
     def _main_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.close_window = True
                 self._quit_window()
         pygame.display.flip()
 
@@ -29,6 +31,7 @@ class View:
 class StartSelectionView(View):
     def __init__(self):
         self.active = True
+        self.close_window = False
         self.name = 'start_selection_view'
 
         self.initializer = Initializer(view_name=self.name)
@@ -47,6 +50,7 @@ class StartSelectionView(View):
         for event in pygame.event.get():
             self.central_start_button.draw()
             if event.type == pygame.QUIT:
+                self.close_window = True
                 self._quit_window()
             elif event.type == pygame.MOUSEBUTTONUP:
                 self.press_position = pygame.mouse.get_pos()
@@ -56,6 +60,7 @@ class StartSelectionView(View):
 
 class MainView(View):
     def __init__(self):
+        self.close_window = False
         self.active = True
 
         self.name = 'main_view'
@@ -103,6 +108,7 @@ class MainView(View):
         for event in pygame.event.get():
             # Close the window
             if event.type == pygame.QUIT:
+                self.close_window = True
                 self._quit_window()  # Inherited
             # Mouse click
             elif event.type == pygame.MOUSEBUTTONUP:
@@ -114,6 +120,7 @@ class MainView(View):
 
 class FinalView(View):
     def __init__(self, final_message):
+        self.close_window = False
         self.active = True
         self.name = 'final_view'
 
@@ -126,11 +133,27 @@ class FinalView(View):
         self.final_message = self.initializer.final_message
         self.final_message.draw()
 
+        self.restart_button = self.initializer.restart_button
+        self.restart_button.draw()
+
+        self.restart_game = False
+
+    def _mouse_press(self):
+        if self.restart_button.is_pressed(self.press_position):
+            self.restart_game = True
+            self._quit_window()
+
     def _main_loop(self):
         for event in pygame.event.get():
             self.final_message.draw()
+            self.restart_button.draw()
             if event.type == pygame.QUIT:
+                self.close_window = True
                 self._quit_window()
+            # Mouse click
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.press_position = pygame.mouse.get_pos()
+                self._mouse_press()
 
         pygame.display.flip()
 
@@ -138,8 +161,18 @@ class FinalView(View):
 class ViewManager:
     def __init__(self):
         self.set_new_view(new_view=StartSelectionView())
-        self.display_main_view()
-        self.display_final_view()
+        while True:
+            if self.current_view.close_window:
+                break
+            self.display_main_view()
+            if self.current_view.close_window:
+                break
+            self.display_final_view()
+            if self.current_view.close_window:
+                break
+            self.display_start_selection_view()
+            if self.current_view.close_window:
+                break
 
     def display_main_view(self):
         assert self.current_view.name == 'start_selection_view'
@@ -154,6 +187,11 @@ class ViewManager:
                 FinalView(final_message=f'{winner_name} won the game'))
         elif self.current_view.game.tied:
             self.set_new_view(FinalView(final_message='It is a tie'))
+
+    def display_start_selection_view(self):
+        assert self.current_view.name == 'final_view'
+        if self.current_view.restart_game:
+            self.set_new_view(StartSelectionView())
 
     def set_new_view(self, new_view):
         self.current_view = new_view

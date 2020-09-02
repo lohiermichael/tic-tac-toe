@@ -55,6 +55,7 @@ class Initializer:
     def _initialize_start_selection_view(self):
         self.central_start_button = Button(window=self.window,
                                            text='Start playing',
+                                           font=START_BUTTON_FONT,
                                            center=WINDOW_CENTER,
                                            width=START_BUTTON_WIDTH,
                                            height=START_BUTTON_HEIGHT)
@@ -63,6 +64,14 @@ class Initializer:
         self.final_message = Button(window=self.window,
                                     text=self.final_message,
                                     color=GREY,
+                                    font=FINAL_MESSAGE_FONT,
                                     center=WINDOW_CENTER,
                                     width=FINAL_MESSAGE_WIDTH,
                                     height=FINAL_MESSAGE_HEIGHT)
+
+        self.restart_button = Button(window=self.window,
+                                     text='Restart',
+                                     font=START_BUTTON_FONT,
+                                     center=RESTART_BUTTON_CENTER,
+                                     width=RESTART_BUTTON_WIDTH,
+                                     height=RESTART_BUTTON_HEIGHT)

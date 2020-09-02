@@ -194,9 +194,10 @@ class Cross:
 
 
 class Button():
-    def __init__(self, window, color=BLACK, center=None, height=None, width=None, text=''):
+    def __init__(self, font, window, color=BLACK, center=None, height=None, width=None, text=''):
         self.window = window
         self.color = color
+        self.font = font
 
         self.center = center
         self.center_x, self.center_y = self.center
@@ -224,7 +225,7 @@ class Button():
                                                    self.height), line_width)
 
         if self.text != '':
-            text = BUTTON_FONT.render(self.text, line_width, BLACK)
+            text = self.font.render(self.text, line_width, BLACK)
             self.window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
                                     self.y + (self.height/2 - text.get_height()/2)))
 
