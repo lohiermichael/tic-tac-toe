@@ -35,14 +35,13 @@ class Square:
                           2), int((self.tl_y + self.bl_y)/2)
         self.center_x, self.center_y = self.center
 
-    def is_clicked(self, pos_click):
+    def is_clicked(self, press_position):
 
-        pc_x, pc_y = pos_click
-
-        return (self.tl_x < pc_x < self.tr_x) and (self.tl_y < pc_y < self.bl_y)
+        pp_x, pp_y = press_position
+        return (self.tl_x < pp_x < self.tr_x) and (self.tl_y < pp_y < self.bl_y)
 
     def draw(self, line_width=1):
-        # Left, Top, Width, Height
+        # Left, Top, Width, height
         pygame.draw.rect(self.window, self.color,
                          (self.left, self.top, self.size, self.size), line_width)
 
@@ -192,3 +191,45 @@ class Cross:
 
         pygame.draw.line(self.window, self.color, self.tl, self.br, line_width)
         pygame.draw.line(self.window, self.color, self.tr, self.bl, line_width)
+
+
+class Button():
+    def __init__(self, window, color=BLACK, center=None, height=None, width=None):
+        self.window = window
+        self.color = color
+
+        self.center = center
+        self.center_x, self.center_y = self.center
+
+        self.width = width
+        self.height = height
+
+        self.x = self.center_x - int(self.width/2)
+        self.y = self.center_y - int(self.height/2)
+
+        # self.text = text
+
+    def draw(self, outline=True, outline_depth=2, line_width=1):
+        """Call this method to draw a button on the screen"""
+
+        if outline:
+            pygame.draw.rect(self.window, outline, (self.x-outline_depth,
+                                                    self.y - outline_depth,
+                                                    self.width+outline_depth*2,
+                                                    self.height+outline_depth*2), line_width)
+
+        pygame.draw.rect(self.window, self.color, (self.x,
+                                                   self.y,
+                                                   self.width,
+                                                   self.height), line_width)
+
+        # if self.text != '':
+        #     text = BUTTON_FONT.render(self.text, line_width, (0, 0, 0))
+        #     self.window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
+        #                             self.y + (self.height/2 - text.get_height()/2)))
+
+    def is_pressed(self, press_position):
+
+        pp_x, pp_y = press_position
+
+        return (self.x < pp_x < self.x+self.width) and (self.y < pp_y < self.y+self.height)

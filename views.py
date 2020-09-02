@@ -4,7 +4,7 @@ from initialize_objects import Initializer
 
 
 class View:
-    def __init__(self, window):
+    def __init__(self):
         self.active = True
         self.name = 'base'
 
@@ -22,12 +22,14 @@ class View:
     def _main_loop(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.quit_window()
+                self._quit_window()
         pygame.display.flip()
 
 
 class MainView(View):
     def __init__(self):
+        self.active = True
+
         self.name = 'main_view'
 
         self.initializer = Initializer(view_name=self.name)
@@ -36,8 +38,6 @@ class MainView(View):
         self.big_square = self.initializer.big_square
         self.grid = self.initializer.grid
         self.game = self.initializer.game
-
-        self.active = True
 
     def _check_click_square(self, i_square, j_square):
         if self.grid[i_square][j_square].is_clicked(self.press_position) and self.grid[i_square][j_square].state == 'empty':
@@ -82,3 +82,44 @@ class MainView(View):
                 self._mouse_press()
 
         pygame.display.flip()
+
+
+class StartSelectionView(View):
+    def __init__(self):
+        self.active = True
+        self.name = 'start_selection_view'
+
+        self.initializer = Initializer(view_name=self.name)
+
+        self.window = self.initializer.window
+        self.central_start_button = self.initializer.central_start_button
+
+        self.start_game = False
+
+    def _mouse_press(self):
+        if self.central_start_button.is_pressed(self.press_position):
+            self.start_game = True
+            self._quit_window()
+
+    def _main_loop(self):
+        for event in pygame.event.get():
+            self.central_start_button.draw()
+            if event.type == pygame.QUIT:
+                self._quit_window()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                self.press_position = pygame.mouse.get_pos()
+                self._mouse_press()
+        pygame.display.flip()
+
+
+class ViewManager:
+    def __init__(self):
+        self.set_new_view(new_view=StartSelectionView())
+
+        if self.current_view.name == 'start_selection_view':
+            if self.current_view.start_game:
+                self.set_new_view(MainView())
+
+    def set_new_view(self, new_view):
+        self.current_view = new_view
+        self.current_view.start_main_loop()
