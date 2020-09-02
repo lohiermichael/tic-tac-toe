@@ -25,6 +25,7 @@ while game.on:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             game.on = False
+            break
             print('closed manually')
 
         elif event.type == pygame.MOUSEBUTTONUP:
@@ -35,18 +36,20 @@ while game.on:
                         print(game.playing_player.name)
                         game.playing_player.play(in_grid=grid,
                                                  on_square=(i, j))
+
+                        # End of the game
+
+                        # First: check one player has not won
+                        if grid.there_is_a_winner() != 'not':
+                            print(f'{game.playing_player.name} won')
+                            game.on = False
+
+                        # Second: check if the grid is not full
+                        elif grid.is_full():
+                            print(f'It is a tie')
+                            game.on = False
+
                         game.change_playing_player()
-
-    # # End of the game
-
-    # # First: check one player has not won
-    # if grid.is_a_winner() != 'not':
-    #     print(f'{game.playing_player.name} won')
-    #     game.on = False
-
-    # # Second: check if the grid is not full
-    # if grid.is_full():
-    #     game.on = False
 
     # Make the most recently drawn screen visible.
     pygame.display.flip()
