@@ -30,8 +30,8 @@ def initialize_grid():
 
 def initialize_players():
     """Create two players"""
-    player_1 = Player(sign='cross', playing=True)
-    player_2 = Player(sign='circle', playing=False)
+    player_1 = Player(name='player_1', sign='cross', playing=True)
+    player_2 = Player(name='player_2', sign='circle', playing=False)
     return player_1, player_2
 
 

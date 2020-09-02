@@ -15,7 +15,7 @@ grid = initialize_grid()
 
 player_1, player_2 = initialize_players()
 game = initialize_game()
-playing_player = game.playing_player
+
 # Main loop
 while game.on:
 
@@ -25,14 +25,15 @@ while game.on:
     # An event is a click on the mouth or on the key of the keyboard or else
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            playing = False
+            game.on = False
             print('closed manually')
 
         elif event.type == pygame.MOUSEBUTTONUP:
             pos_click = pygame.mouse.get_pos()
             for i in range(3):
                 for j in range(3):
-                    if grid[i][j].is_clicked(pos_click):
+                    if grid[i][j].is_clicked(pos_click) and grid[i][j].state == 'empty':
+                        print(game.playing_player.name)
                         game.playing_player.play(in_grid=grid,
                                                  on_square=(i, j))
                         game.change_playing_player()
