@@ -43,13 +43,26 @@ BIG_SQUARE_TR = (700, 100)
 
 # Counter message
 COUNTER_MESSAGE_FONT = pygame.font.SysFont('Comic Sans MS', 40)
-COUNTER_MESSAGE_CENTER = (900, 100)
+COUNTER_MESSAGE_CENTER = (950, 100)
 COUNTER_MESSAGE_WIDTH = 200
 COUNTER_MESSAGE_HEIGHT = 100
 
 
 def set_counter_message(n_games):
     return f'You are playing game 1/{n_games}'
+
+
+# Player 1 display
+PLAYER_1_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
+PLAYER_1_DISPLAY_CENTER = (950, 300)
+PLAYER_1_DISPLAY_WIDTH = 100
+PLAYER_1_DISPLAY_HEIGHT = 50
+
+# Player 2 display
+PLAYER_2_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
+PLAYER_2_DISPLAY_CENTER = (950, 500)
+PLAYER_2_DISPLAY_WIDTH = 100
+PLAYER_2_DISPLAY_HEIGHT = 50
 
 
 ################################## FINAL VIEW #####################################

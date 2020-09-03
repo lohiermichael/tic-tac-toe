@@ -24,6 +24,13 @@ class MainView(View):
         self.counter_message = self.initializer.counter_message
         self.counter_message.draw(window=self.window)
 
+        # Display players
+        self.player_1_display = self.initializer.player_1_display
+        self.player_1_display.draw(window=self.window)
+
+        self.player_2_display = self.initializer.player_2_display
+        self.player_2_display.draw(window=self.window)
+
         # Draw the grid
         self.grid.draw(window=self.window, line_width=2)
 

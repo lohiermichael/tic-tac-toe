@@ -68,6 +68,22 @@ class Initializer:
                                                  width=COUNTER_MESSAGE_WIDTH,
                                                  height=COUNTER_MESSAGE_HEIGHT)
 
+        # Initialize player 1 display
+        self.player_1_display = RectangularButton(text='player_1',
+                                                  font=PLAYER_1_DISPLAY_FONT,
+                                                  border=False,
+                                                  center=PLAYER_1_DISPLAY_CENTER,
+                                                  width=PLAYER_1_DISPLAY_WIDTH,
+                                                  height=PLAYER_1_DISPLAY_HEIGHT)
+
+        # Initialize player 2 display
+        self.player_2_display = RectangularButton(text='player_2',
+                                                  font=PLAYER_2_DISPLAY_FONT,
+                                                  border=False,
+                                                  center=PLAYER_2_DISPLAY_CENTER,
+                                                  width=PLAYER_2_DISPLAY_WIDTH,
+                                                  height=PLAYER_2_DISPLAY_HEIGHT)
+
     def initialize_final_view(self, final_message_text):
 
         self.final_message_text = final_message_text
