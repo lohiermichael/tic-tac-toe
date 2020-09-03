@@ -8,23 +8,9 @@ from config import *
 
 
 class Initializer:
-    def __init__(self, view_name, final_message=None):
-        self.view_name = view_name
-        self.final_message = final_message
+    def __init__(self):
 
         self._initialize_window()
-
-        if self.view_name == 'base':
-            pass
-
-        elif self.view_name == 'start_selection_view':
-            self._initialize_start_selection_view()
-
-        elif self.view_name == 'main_view':
-            self._initialize_main_view()
-
-        elif self.view_name == 'final_view':
-            self._initialize_final_view()
 
     def _initialize_window(self):
         self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -32,7 +18,7 @@ class Initializer:
 
         return self.window
 
-    def _initialize_start_selection_view(self):
+    def initialize_start_view(self):
         self.start_button = RectangularButton(text=START_BUTTON_TEXT,
                                               font=START_BUTTON_FONT,
                                               center=START_BUTTON_CENTER,
@@ -52,7 +38,9 @@ class Initializer:
                                                              height=NUMBER_GAMES_HEIGHT,
                                                              center=NUMBER_GAMES_CENTER)
 
-    def _initialize_main_view(self):
+    def initialize_main_view(self, counter_message_text):
+
+        self.counter_message_text = counter_message_text
         # Initialize big square
         self.big_square = Square(tl=BIG_SQUARE_TL,
                                  tr=BIG_SQUARE_TR)
@@ -72,9 +60,18 @@ class Initializer:
                          player_2=self.player_2,
                          playing_player=self.player_1)
 
-    def _initialize_final_view(self):
-        self.final_message = RectangularButton(text=self.final_message,
-                                               color=GREY,
+        # Initialize message counter
+        self.counter_message = RectangularButton(text=self.counter_message_text,
+                                                 font=COUNTER_MESSAGE_FONT,
+                                                 border=False,
+                                                 center=COUNTER_MESSAGE_CENTER,
+                                                 width=COUNTER_MESSAGE_WIDTH,
+                                                 height=COUNTER_MESSAGE_HEIGHT)
+
+    def initialize_final_view(self, final_message_text):
+
+        self.final_message_text = final_message_text
+        self.final_message = RectangularButton(text=self.final_message_text,
                                                font=FINAL_MESSAGE_FONT,
                                                border=False,
                                                center=WINDOW_CENTER,

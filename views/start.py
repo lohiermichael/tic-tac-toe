@@ -10,7 +10,8 @@ class StartView(View):
         self.close_window = False
         self.name = 'start_selection_view'
 
-        self.initializer = Initializer(view_name=self.name)
+        self.initializer = Initializer()
+        self.initializer.initialize_start_view()
 
         self.window = self.initializer.window
 

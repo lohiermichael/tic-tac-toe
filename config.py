@@ -37,13 +37,22 @@ NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((2/5)*WINDOW_HEIGHT))
 
 #################################### MAIN VIEW ####################################
 
-# BIG SQUARE OF THE GRID
+# Big square of the grid
 BIG_SQUARE_TL = (100, 100)
 BIG_SQUARE_TR = (700, 100)
 
+# Counter message
+COUNTER_MESSAGE_FONT = pygame.font.SysFont('Comic Sans MS', 40)
+COUNTER_MESSAGE_CENTER = (900, 100)
+COUNTER_MESSAGE_WIDTH = 200
+COUNTER_MESSAGE_HEIGHT = 100
+
+
+def set_counter_message(n_games):
+    return f'You are playing game 1/{n_games}'
+
 
 ################################## FINAL VIEW #####################################
-
 # Button final message
 FINAL_MESSAGE_WIDTH = 400
 FINAL_MESSAGE_HEIGHT = 200
@@ -60,5 +69,5 @@ RESTART_BUTTON_HEIGHT = 100
 FINAL_MESSAGE_TIE = 'It is a tie'
 
 
-def final_message_win(winner_name):
+def set_final_message_win(winner_name):
     return f'{winner_name} won the game'

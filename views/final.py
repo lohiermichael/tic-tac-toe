@@ -9,16 +9,16 @@ class FinalView(View):
         self.close_window = False
         self.active = True
         self.name = 'final_view'
+        self.final_message = final_message
 
         self.final_message = final_message
 
-        self.initializer = Initializer(
-            view_name=self.name, final_message=self.final_message)
+        self.initializer = Initializer()
+        self.initializer.initialize_final_view()
 
         self.window = self.initializer.window
 
         # Finale message
-        self.final_message = self.initializer.final_message
         self.final_message.draw(window=self.window)
 
         # Restart button

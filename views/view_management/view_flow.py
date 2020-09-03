@@ -7,6 +7,8 @@ from views.final import FinalView
 
 from objects.game_objects import Match
 
+# FYI
+from config import set_counter_message, set_final_message_win
 from config import *
 
 
@@ -14,8 +16,7 @@ class ViewFlow:
     def __init__(self):
         self.set_new_view(new_view=StartView())
 
-        match = Match(n_games=self.current_view.n_games)
-        print(match.n_games)
+        self.current_match = Match(n_games=self.current_view.n_games)
 
         while True:
             if self.current_view.close_window:
@@ -38,14 +39,15 @@ class ViewFlow:
     def display_main_view(self):
         assert self.current_view.name == 'start_selection_view'
         if self.current_view.start_game:
-            self.set_new_view(MainView())
+            self.set_new_view(
+                MainView(counter_message=set_counter_message(self.current_view.n_games)))
 
     def display_final_view(self):
         assert self.current_view.name == 'main_view'
         if self.current_view.game.won:
             winner_name = self.current_view.game.winner.name
             self.set_new_view(
-                FinalView(final_message=final_message_win(winner_name)))
+                FinalView(final_message=set_final_message_win(winner_name)))
         elif self.current_view.game.tied:
             self.set_new_view(FinalView(final_message=FINAL_MESSAGE_TIE))
 

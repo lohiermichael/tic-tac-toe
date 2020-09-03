@@ -5,18 +5,24 @@ from views.view_management.view_initialization import Initializer
 
 
 class MainView(View):
-    def __init__(self):
+    def __init__(self, counter_message):
         self.close_window = False
         self.active = True
 
         self.name = 'main_view'
 
-        self.initializer = Initializer(view_name=self.name)
+        self.initializer = Initializer()
+        self.initializer.initialize_main_view(
+            counter_message_text=counter_message)
 
         self.window = self.initializer.window
         self.big_square = self.initializer.big_square
         self.grid = self.initializer.grid
         self.game = self.initializer.game
+
+        # Counter message
+        self.counter_message = self.initializer.counter_message
+        self.counter_message.draw(window=self.window)
 
         # Draw the grid
         self.grid.draw(window=self.window, line_width=2)
