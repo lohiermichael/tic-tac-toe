@@ -38,8 +38,8 @@ NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((2/5)*WINDOW_HEIGHT))
 #################################### MAIN VIEW ####################################
 
 # BIG SQUARE OF THE GRID
-BIG_SQUARE_TL = (300, 100)
-BIG_SQUARE_TR = (900, 100)
+BIG_SQUARE_TL = (100, 100)
+BIG_SQUARE_TR = (700, 100)
 
 
 ################################## FINAL VIEW #####################################

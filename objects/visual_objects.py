@@ -258,7 +258,7 @@ class CollectionRadioButtons:
 
         self.list_buttons = self._define_buttons()
 
-        self.button_selected = None
+        self.selected_button = None
 
     def _define_buttons(self):
 

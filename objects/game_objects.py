@@ -32,3 +32,17 @@ class Game:
             self.player_2.playing = False
             self.player_1.playing = True
             self.playing_player = self.player_1
+
+
+class Match:
+    def __init__(self,
+                 n_games: int,
+                 player_1: Player = None,
+                 player_2: Player = None):
+
+        self.n_games = n_games
+        self.player_1 = player_1
+        self.player_2 = player_2
+        # {'game_1': 'player_1', 'game_1': 'playing',
+        #     'game_3': 'pending'}
+        self.status_by_game = None

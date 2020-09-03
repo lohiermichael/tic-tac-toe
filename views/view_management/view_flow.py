@@ -5,12 +5,18 @@ from views.start import StartView
 from views.main import MainView
 from views.final import FinalView
 
+from objects.game_objects import Match
+
 from config import *
 
 
 class ViewFlow:
     def __init__(self):
         self.set_new_view(new_view=StartView())
+
+        match = Match(n_games=self.current_view.n_games)
+        print(match.n_games)
+
         while True:
             if self.current_view.close_window:
                 break
