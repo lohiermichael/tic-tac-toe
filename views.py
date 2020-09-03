@@ -55,13 +55,21 @@ class StartSelectionView(View):
         self.count2 = 0
 
     def _mouse_press(self):
-        if self.start_button.is_over(self.press_position):
+        if self.start_button.is_under(self.press_position):
             self.start_game = True
             self._quit_window()
 
+        for index_button in range(len(self.number_games_selection.list_buttons)):
+            if self.number_games_selection.is_under(mouse_position=self.press_position, index_button=index_button):
+                self.number_games_selection.button_selected = index_button
+                self.number_games_selection.list_buttons[index_button].border = True
+                self.number_games_selection.draw(window=self.window)
+
     def _mouse_over(self):
         for index_button in range(len(self.number_games_selection.list_buttons)):
-            if self.number_games_selection.is_over(mouse_position=self.press_position, index_button=index_button):
+            if self.number_games_selection.is_under(mouse_position=self.press_position, index_button=index_button):
+                self.number_games_selection.list_buttons[index_button].border = True
+            elif self.number_games_selection.button_selected == index_button:
                 self.number_games_selection.list_buttons[index_button].border = True
             else:
                 self.number_games_selection.list_buttons[index_button].border = False
@@ -106,7 +114,7 @@ class MainView(View):
         self.grid.draw(window=self.window, line_width=2)
 
     def _check_click_square(self, i_square, j_square):
-        if self.grid[i_square][j_square].is_over(self.press_position) and self.grid[i_square][j_square].state == 'empty':
+        if self.grid[i_square][j_square].is_under(self.press_position) and self.grid[i_square][j_square].state == 'empty':
             # Player plays
             self.game.playing_player.play(window=self.window,
                                           in_grid=self.grid,
@@ -173,7 +181,7 @@ class FinalView(View):
         self.restart_game = False
 
     def _mouse_press(self):
-        if self.restart_button.is_over(self.press_position):
+        if self.restart_button.is_under(self.press_position):
             self.restart_game = True
             self._quit_window()
 

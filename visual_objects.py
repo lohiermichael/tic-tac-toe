@@ -37,7 +37,7 @@ class Square:
         pygame.draw.rect(window, self.color,
                          (self.left, self.top, self.size, self.size), line_width)
 
-    def is_over(self, mouse_position):
+    def is_under(self, mouse_position):
 
         mp_x, mp_y = mouse_position
         return (self.tl_x < mp_x < self.tr_x) and (self.tl_y < mp_y < self.bl_y)
@@ -233,7 +233,7 @@ class RectangularButton():
             window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
                                self.y + (self.height/2 - text.get_height()/2)))
 
-    def is_over(self, mouse_position):
+    def is_under(self, mouse_position):
 
         mp_x, mp_y = mouse_position
         return (self.x < mp_x < self.x+self.width) and (self.y < mp_y < self.y+self.height)
@@ -258,6 +258,8 @@ class CollectionRadioButtons:
 
         self.list_buttons = self._define_buttons()
 
+        self.button_selected = None
+
     def _define_buttons(self):
 
         self.number_buttons = len(self.collection_messages)
@@ -278,9 +280,9 @@ class CollectionRadioButtons:
     def draw(self, window):
 
         for button in self.list_buttons:
-            button.draw(window=window)
+            button.draw(window=window, outline=False)
 
-    def is_over(self, mouse_position, index_button):
+    def is_under(self, mouse_position, index_button):
 
         button = self.list_buttons[index_button]
         mp_x, mp_y = mouse_position
