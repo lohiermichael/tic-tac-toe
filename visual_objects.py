@@ -4,7 +4,6 @@ from config import *
 
 class Square:
     def __init__(self, tl=None, tr=None, state='empty', color=BLACK):
-        self.color = color
         self.state = state
 
         # Top left corner
@@ -38,10 +37,10 @@ class Square:
         pygame.draw.rect(window, self.color,
                          (self.left, self.top, self.size, self.size), line_width)
 
-    def is_over(self, press_position):
+    def is_over(self, mouse_position):
 
-        pp_x, pp_y = press_position
-        return (self.tl_x < pp_x < self.tr_x) and (self.tl_y < pp_y < self.bl_y)
+        mp_x, mp_y = mouse_position
+        return (self.tl_x < mp_x < self.tr_x) and (self.tl_y < mp_y < self.bl_y)
 
     def change_state(self, window, new_state):
 
@@ -188,24 +187,35 @@ class Cross:
         pygame.draw.line(window, self.color, self.tr, self.bl, line_width)
 
 
-class Button():
-    def __init__(self, font, color=BLACK, center=None, height=None, width=None, text=''):
+class RectangularButton():
+    def __init__(self, font, color=BLACK, center=None, border=True, x=None, y=None, height=None, width=None, text=''):
         self.color = color
         self.font = font
-
-        self.center = center
-        self.center_x, self.center_y = self.center
+        self.border = border
 
         self.width = width
         self.height = height
 
-        self.x = self.center_x - int(self.width/2)
-        self.y = self.center_y - int(self.height/2)
+        # You can define the position of the button by center...
+        if center:
+            self.center = center
+            self.center_x, self.center_y = self.center
+            self.x = self.center_x - int(self.width/2)
+            self.y = self.center_y - int(self.height/2)
+
+        # ...or x and y
+        if x and y:
+            self.x = x
+            self.y = y
+            self.center = (self.x + int(self.width/2),
+                           self.y + int(self.height/2))
 
         self.text = text
 
-    def draw(self, window, outline=True, outline_thinkness=2, line_width=1):
+    def draw(self, window, outline=True, outline_thinkness=2):
         """Call this method to draw a button on the screen"""
+
+        line_width = 1 if self.border else -1
 
         if outline:
             pygame.draw.rect(window, outline, (self.x-outline_thinkness,
@@ -223,11 +233,55 @@ class Button():
             window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
                                self.y + (self.height/2 - text.get_height()/2)))
 
-    def is_over(self, press_position):
+    def is_over(self, mouse_position):
 
-        pp_x, pp_y = press_position
-        return (self.x < pp_x < self.x+self.width) and (self.y < pp_y < self.y+self.height)
+        mp_x, mp_y = mouse_position
+        return (self.x < mp_x < self.x+self.width) and (self.y < mp_y < self.y+self.height)
 
 
-# class CircularButton:
-#     def __init_(self, color=BLACK, center=None, height=None, width=None, radius=None):
+class CollectionRadioButtons:
+    """Multiple circular buttons and some text with it"""
+
+    def __init__(self, collection_messages=None, font=None, color=BLACK, width=None, height=None, center=None):
+
+        self.color = color
+        self.width = width
+        self.height = height
+        self.collection_messages = collection_messages
+        self.font = font
+
+        self.center = center
+        self.center_x, self.center_y = self.center
+
+        self.x = self.center_x - int(self.width/2)
+        self.y = self.center_y - int(self.height/2)
+
+        self.list_buttons = self._define_buttons()
+
+    def _define_buttons(self):
+
+        self.number_buttons = len(self.collection_messages)
+        self.height_button = int(self.height/self.number_buttons)
+
+        return [
+            RectangularButton(font=self.font,
+                              color=self.color,
+                              border=False,
+                              x=self.x,
+                              y=self.y + i_button * self.height_button,
+                              width=self.width,
+                              height=self.height_button,
+                              text=self.collection_messages[i_button])
+            for i_button in range(self.number_buttons)
+        ]
+
+    def draw(self, window):
+
+        for button in self.list_buttons:
+            button.draw(window=window)
+
+    def is_over(self, mouse_position, index_button):
+
+        button = self.list_buttons[index_button]
+        mp_x, mp_y = mouse_position
+        return (button.x < mp_x < button.x+button.width) and (button.y < mp_y < button.y+button.height)

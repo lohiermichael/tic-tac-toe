@@ -1,7 +1,7 @@
 import pygame
 
 from config import *
-from visual_objects import Square, Grid, Button
+from visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons
 from player_objects import Player
 from game_objects import Game
 
@@ -26,10 +26,23 @@ class Initializer:
             self._initialize_final_view()
 
     def _initialize_window(self):
-        self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_LENGTH))
+        self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.window.fill(GREY)
 
         return self.window
+
+    def _initialize_start_selection_view(self):
+        self.start_button = RectangularButton(text='Start playing',
+                                              font=START_BUTTON_FONT,
+                                              center=START_BUTTON_CENTER,
+                                              width=START_BUTTON_WIDTH,
+                                              height=START_BUTTON_HEIGHT)
+
+        self.number_games_selection = CollectionRadioButtons(collection_messages=NUMBER_GAMES_COLLECTION,
+                                                             font=NUMBER_GAMES_FONT,
+                                                             width=NUMBER_GAMES_WIDTH,
+                                                             height=NUMBER_GAMES_HEIGHT,
+                                                             center=NUMBER_GAMES_CENTER)
 
     def _initialize_main_view(self):
         # Initialize big square
@@ -51,23 +64,17 @@ class Initializer:
                          player_2=self.player_2,
                          playing_player=self.player_1)
 
-    def _initialize_start_selection_view(self):
-        self.central_start_button = Button(text='Start playing',
-                                           font=START_BUTTON_FONT,
-                                           center=WINDOW_CENTER,
-                                           width=START_BUTTON_WIDTH,
-                                           height=START_BUTTON_HEIGHT)
-
     def _initialize_final_view(self):
-        self.final_message = Button(text=self.final_message,
-                                    color=GREY,
-                                    font=FINAL_MESSAGE_FONT,
-                                    center=WINDOW_CENTER,
-                                    width=FINAL_MESSAGE_WIDTH,
-                                    height=FINAL_MESSAGE_HEIGHT)
+        self.final_message = RectangularButton(text=self.final_message,
+                                               color=GREY,
+                                               font=FINAL_MESSAGE_FONT,
+                                               border=False,
+                                               center=WINDOW_CENTER,
+                                               width=FINAL_MESSAGE_WIDTH,
+                                               height=FINAL_MESSAGE_HEIGHT)
 
-        self.restart_button = Button(text='Restart',
-                                     font=START_BUTTON_FONT,
-                                     center=RESTART_BUTTON_CENTER,
-                                     width=RESTART_BUTTON_WIDTH,
-                                     height=RESTART_BUTTON_HEIGHT)
+        self.restart_button = RectangularButton(text='Restart',
+                                                font=START_BUTTON_FONT,
+                                                center=RESTART_BUTTON_CENTER,
+                                                width=RESTART_BUTTON_WIDTH,
+                                                height=RESTART_BUTTON_HEIGHT)

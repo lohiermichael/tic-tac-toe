@@ -4,8 +4,8 @@ pygame.font.init()
 
 # Window size
 WINDOW_WIDTH = 1200
-WINDOW_LENGTH = 800
-WINDOW_CENTER = (int(WINDOW_WIDTH/2), int(WINDOW_LENGTH/2))
+WINDOW_HEIGHT = 800
+WINDOW_CENTER = (int(WINDOW_WIDTH/2), int(WINDOW_HEIGHT/2))
 
 # Colors
 GREY = (247, 247, 247)
@@ -16,7 +16,15 @@ BLACK = (0, 0, 0)
 # Start button
 START_BUTTON_WIDTH = 200
 START_BUTTON_HEIGHT = 100
+START_BUTTON_CENTER = (int(WINDOW_WIDTH/2), int((3/4)*WINDOW_HEIGHT))
 START_BUTTON_FONT = pygame.font.SysFont('Comic Sans MS', 30)
+
+# Number of games
+NUMBER_GAMES_COLLECTION = ['1', '3', '5']
+NUMBER_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 30)
+NUMBER_GAMES_WIDTH = 50
+NUMBER_GAMES_HEIGHT = 150
+NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((1/4)*WINDOW_HEIGHT))
 
 
 #################################### MAIN VIEW ####################################
@@ -35,7 +43,7 @@ FINAL_MESSAGE_FONT = pygame.font.SysFont('Comic Sans MS', 40)
 
 
 # Restart button
-RESTART_BUTTON_CENTER = (int(WINDOW_WIDTH/2), 3*int(WINDOW_LENGTH/4))
+RESTART_BUTTON_CENTER = (int(WINDOW_WIDTH/2), 3*int(WINDOW_HEIGHT/4))
 RESTART_BUTTON_WIDTH = 200
 RESTART_BUTTON_HEIGHT = 100
 
