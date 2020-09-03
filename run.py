@@ -1,10 +1,11 @@
 import pygame
-from views import ViewManager
+
+from views.view_management.view_flow import ViewFlow
 
 
 def run_game():
     pygame.init()
-    ViewManager()
+    ViewFlow()
 
 
 if __name__ == "__main__":

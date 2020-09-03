@@ -1,4 +1,4 @@
-from visual_objects import Grid
+from objects.visual_objects import Grid
 
 
 class Player:

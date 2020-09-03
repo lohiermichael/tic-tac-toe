@@ -1,9 +1,10 @@
 import pygame
 
+from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons
+from objects.player_objects import Player
+from objects.game_objects import Game
+
 from config import *
-from visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons
-from player_objects import Player
-from game_objects import Game
 
 
 class Initializer:
