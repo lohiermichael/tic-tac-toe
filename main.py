@@ -1,7 +1,11 @@
 import pygame
 from views import ViewManager
 
-pygame.init()
+
+def run_game():
+    pygame.init()
+    ViewManager()
+
 
 if __name__ == "__main__":
-    ViewManager()
+    run_game()

@@ -210,14 +210,14 @@ class Button():
 
         self.text = text
 
-    def draw(self, outline=True, outline_depth=2, line_width=1):
+    def draw(self, outline=True, outline_thinkness=2, line_width=1):
         """Call this method to draw a button on the screen"""
 
         if outline:
-            pygame.draw.rect(self.window, outline, (self.x-outline_depth,
-                                                    self.y - outline_depth,
-                                                    self.width+outline_depth*2,
-                                                    self.height+outline_depth*2), line_width)
+            pygame.draw.rect(self.window, outline, (self.x-outline_thinkness,
+                                                    self.y - outline_thinkness,
+                                                    self.width+outline_thinkness*2,
+                                                    self.height+outline_thinkness*2), line_width)
 
         pygame.draw.rect(self.window, self.color, (self.x,
                                                    self.y,
