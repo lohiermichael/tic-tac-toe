@@ -38,17 +38,17 @@ class StartSelectionView(View):
 
         self.window = self.initializer.window
         self.central_start_button = self.initializer.central_start_button
-        self.central_start_button.draw()
+        self.central_start_button.draw(window=self.window)
         self.start_game = False
 
     def _mouse_press(self):
-        if self.central_start_button.is_pressed(self.press_position):
+        if self.central_start_button.is_over(self.press_position):
             self.start_game = True
             self._quit_window()
 
     def _main_loop(self):
         for event in pygame.event.get():
-            self.central_start_button.draw()
+            self.central_start_button.draw(window=self.window)
             if event.type == pygame.QUIT:
                 self.close_window = True
                 self._quit_window()
@@ -73,9 +73,10 @@ class MainView(View):
         self.game = self.initializer.game
 
     def _check_click_square(self, i_square, j_square):
-        if self.grid[i_square][j_square].is_clicked(self.press_position) and self.grid[i_square][j_square].state == 'empty':
+        if self.grid[i_square][j_square].is_over(self.press_position) and self.grid[i_square][j_square].state == 'empty':
             # Player plays
-            self.game.playing_player.play(in_grid=self.grid,
+            self.game.playing_player.play(window=self.window,
+                                          in_grid=self.grid,
                                           on_square=(i_square, j_square))
 
             # Test end of the game
@@ -103,7 +104,7 @@ class MainView(View):
     def _main_loop(self):
 
         # Draw the grid
-        self.grid.draw(line_width=2)
+        self.grid.draw(window=self.window, line_width=2)
 
         for event in pygame.event.get():
             # Close the window
@@ -131,22 +132,22 @@ class FinalView(View):
 
         self.window = self.initializer.window
         self.final_message = self.initializer.final_message
-        self.final_message.draw()
+        self.final_message.draw(window=self.window)
 
         self.restart_button = self.initializer.restart_button
-        self.restart_button.draw()
+        self.restart_button.draw(window=self.window)
 
         self.restart_game = False
 
     def _mouse_press(self):
-        if self.restart_button.is_pressed(self.press_position):
+        if self.restart_button.is_over(self.press_position):
             self.restart_game = True
             self._quit_window()
 
     def _main_loop(self):
         for event in pygame.event.get():
-            self.final_message.draw()
-            self.restart_button.draw()
+            self.final_message.draw(window=self.window)
+            self.restart_button.draw(window=self.window)
             if event.type == pygame.QUIT:
                 self.close_window = True
                 self._quit_window()
