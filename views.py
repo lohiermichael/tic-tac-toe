@@ -46,6 +46,9 @@ class StartSelectionView(View):
         # Start button
         self.start_button = self.initializer.start_button
 
+        # Question game
+        self.question_games = self.initializer.question_games
+
         # Number games selection
         self.number_games_selection = self.initializer.number_games_selection
 
@@ -80,6 +83,7 @@ class StartSelectionView(View):
         self._reset_screen()
         self.number_games_selection.draw(window=self.window)
         self.start_button.draw(window=self.window)
+        self.question_games.draw(window=self.window)
 
         self.press_position = pygame.mouse.get_pos()
 

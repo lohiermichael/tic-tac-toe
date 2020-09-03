@@ -32,11 +32,18 @@ class Initializer:
         return self.window
 
     def _initialize_start_selection_view(self):
-        self.start_button = RectangularButton(text='Start playing',
+        self.start_button = RectangularButton(text=START_BUTTON_TEXT,
                                               font=START_BUTTON_FONT,
                                               center=START_BUTTON_CENTER,
                                               width=START_BUTTON_WIDTH,
                                               height=START_BUTTON_HEIGHT)
+
+        self.question_games = RectangularButton(text=QUESTION_GAMES_TEXT,
+                                                font=QUESTION_GAMES_FONT,
+                                                border=False,
+                                                center=QUESTION_GAMES_CENTER,
+                                                width=QUESTION_GAMES_WIDTH,
+                                                height=QUESTION_GAMES_HEIGHT)
 
         self.number_games_selection = CollectionRadioButtons(collection_messages=NUMBER_GAMES_COLLECTION,
                                                              font=NUMBER_GAMES_FONT,
@@ -73,7 +80,7 @@ class Initializer:
                                                width=FINAL_MESSAGE_WIDTH,
                                                height=FINAL_MESSAGE_HEIGHT)
 
-        self.restart_button = RectangularButton(text='Restart',
+        self.restart_button = RectangularButton(text=RESTART_BUTTON_TEXT,
                                                 font=START_BUTTON_FONT,
                                                 center=RESTART_BUTTON_CENTER,
                                                 width=RESTART_BUTTON_WIDTH,
