@@ -38,3 +38,10 @@ FINAL_MESSAGE_FONT = pygame.font.SysFont('Comic Sans MS', 40)
 RESTART_BUTTON_CENTER = (int(WINDOW_WIDTH/2), 3*int(WINDOW_LENGTH/4))
 RESTART_BUTTON_WIDTH = 200
 RESTART_BUTTON_HEIGHT = 100
+
+# Final messages
+FINAL_MESSAGE_TIE = 'It is a tie'
+
+
+def final_message_win(winner_name):
+    return f'{winner_name} won the game'

@@ -1,6 +1,7 @@
 import pygame
 
 from initialize_objects import Initializer
+from config import *
 
 
 class View:
@@ -185,9 +186,9 @@ class ViewManager:
         if self.current_view.game.won:
             winner_name = self.current_view.game.winner.name
             self.set_new_view(
-                FinalView(final_message=f'{winner_name} won the game'))
+                FinalView(final_message=final_message_win(winner_name)))
         elif self.current_view.game.tied:
-            self.set_new_view(FinalView(final_message='It is a tie'))
+            self.set_new_view(FinalView(final_message=FINAL_MESSAGE_TIE))
 
     def display_start_selection_view(self):
         assert self.current_view.name == 'final_view'
