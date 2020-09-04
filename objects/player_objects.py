@@ -1,14 +1,17 @@
-from objects.visual_objects import Grid
+from objects.visual_objects import Grid, Square
 
 
 class Player:
-    def __init__(self, name: str, sign: str, playing: bool):
-        assert sign in ['cross', 'circle']
+    def __init__(self,
+                 name: str,
+                 sign: str = None,
+                 playing: bool = None):
+
         self.name = name
         self.sign = sign
         self.playing = playing
 
-    def play(self, window, in_grid: Grid, on_square):
+    def play(self, window, in_grid: Grid, on_square: Square):
         i, j = on_square
         if self.sign == 'cross':
             # Draw a cross

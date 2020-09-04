@@ -96,20 +96,19 @@ class Initializer:
 
         # Initialize the two players
         self.player_1 = Player(name='player_1',
-                               sign='cross',
                                playing=True)
         self.player_2 = Player(name='player_2',
-                               sign='circle',
                                playing=False)
 
         new_game = Game(player_1=self.player_1,
                         player_2=self.player_2,
-                        playing_player=self.player_1)
+                        starting_player=self.player_1)
 
         match = Match(n_games=match_view.n_games,
                       player_1=self.player_1,
                       player_2=self.player_2)
 
+        match.game_number += 1
         match.list_games.append(new_game)
 
         return match
