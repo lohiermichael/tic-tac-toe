@@ -13,16 +13,10 @@ BLACK = (0, 0, 0)
 
 ############################## START SELECTION VIEW ###############################
 
-# Start button
-START_BUTTON_TEXT = 'Start playing'
-START_BUTTON_WIDTH = 200
-START_BUTTON_HEIGHT = 100
-START_BUTTON_CENTER = (int(WINDOW_WIDTH/2), int((3/4)*WINDOW_HEIGHT))
-START_BUTTON_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 
 QUESTION_GAMES_TEXT = 'Choose how many games you want to play...'
 QUESTION_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 40)
-QUESTION_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((1/5)*WINDOW_HEIGHT))
+QUESTION_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((4/10)*WINDOW_HEIGHT))
 QUESTION_GAMES_WIDTH = 600
 QUESTION_GAMES_HEIGHT = 50
 
@@ -30,9 +24,16 @@ QUESTION_GAMES_HEIGHT = 50
 # Number of games
 NUMBER_GAMES_COLLECTION = ['1', '3', '5']
 NUMBER_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 30)
-NUMBER_GAMES_WIDTH = 50
-NUMBER_GAMES_HEIGHT = 150
-NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((2/5)*WINDOW_HEIGHT))
+NUMBER_GAMES_WIDTH = 150
+NUMBER_GAMES_HEIGHT = 50
+NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((5/10)*WINDOW_HEIGHT))
+
+# Start button
+START_BUTTON_TEXT = 'Start playing'
+START_BUTTON_WIDTH = 200
+START_BUTTON_HEIGHT = 100
+START_BUTTON_CENTER = (int(WINDOW_WIDTH/2), int((8/10)*WINDOW_HEIGHT))
+START_BUTTON_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 
 
 #################################### MAIN VIEW ####################################
