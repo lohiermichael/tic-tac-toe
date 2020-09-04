@@ -291,6 +291,7 @@ class CollectionRadioButtons:
 
 class Arrow:
     def __init__(self, center):
+
         self.image = pygame.image.load(ARROW_IMAGE_PATH)
         self.image = pygame.transform.scale(self.image, ARROW_DIMENSIONS)
 
@@ -303,3 +304,9 @@ class Arrow:
 
     def draw(self, window):
         window.blit(self.image, (self.x, self.y))
+
+    def undraw(self, window):
+        pygame.draw.rect(window, GREY, (self.x,
+                                        self.y,
+                                        self.width,
+                                        self.height), 0)

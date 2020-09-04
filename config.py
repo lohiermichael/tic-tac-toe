@@ -2,6 +2,8 @@ import pygame
 
 pygame.font.init()
 
+GAME_NAME = 'Tic Tac Toe'
+
 # Window size
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800

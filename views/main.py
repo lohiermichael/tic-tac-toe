@@ -34,13 +34,11 @@ class MainView(View):
         self.player_1_display.draw(window=self.window)
 
         self.player_1_arrow = self.initializer.player_1_arrow
-        self.player_1_arrow.draw(window=self.window)
 
         self.player_2_display = self.initializer.player_2_display
         self.player_2_display.draw(window=self.window)
 
         self.player_2_arrow = self.initializer.player_2_arrow
-        self.player_2_arrow.draw(window=self.window)
 
         # Draw the grid
         self.grid.draw(window=self.window, line_width=2)
@@ -75,6 +73,13 @@ class MainView(View):
 
     # Override
     def _main_loop(self):
+
+        if self.game.playing_player.name == 'Player_1':
+            self.player_1_arrow.draw(window=self.window)
+            self.player_2_arrow.undraw(window=self.window)
+        elif self.game.playing_player.name == 'Player_2':
+            self.player_2_arrow.draw(window=self.window)
+            self.player_1_arrow.undraw(window=self.window)
 
         for event in pygame.event.get():
             # Close the window
