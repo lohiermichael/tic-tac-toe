@@ -263,16 +263,16 @@ class CollectionRadioButtons:
     def _define_buttons(self):
 
         self.number_buttons = len(self.collection_messages)
-        self.height_button = int(self.height/self.number_buttons)
+        self.width_button = int(self.width/self.number_buttons)
 
         return [
             RectangularButton(font=self.font,
                               color=self.color,
                               border=False,
-                              x=self.x,
-                              y=self.y + i_button * self.height_button,
-                              width=self.width,
-                              height=self.height_button,
+                              x=self.x + i_button * self.width_button,
+                              y=self.y,
+                              width=self.width_button,
+                              height=self.height,
                               text=self.collection_messages[i_button])
             for i_button in range(self.number_buttons)
         ]
