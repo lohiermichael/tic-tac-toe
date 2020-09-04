@@ -233,6 +233,12 @@ class RectangularButton():
             window.blit(text, (self.x + (self.width/2 - text.get_width()/2),
                                self.y + (self.height/2 - text.get_height()/2)))
 
+    def undraw(self, window):
+        pygame.draw.rect(window, GREY, (self.x,
+                                        self.y,
+                                        self.width,
+                                        self.height), 0)
+
     def is_under(self, mouse_position):
 
         mp_x, mp_y = mouse_position
@@ -287,6 +293,27 @@ class CollectionRadioButtons:
         button = self.list_buttons[index_button]
         mp_x, mp_y = mouse_position
         return (button.x < mp_x < button.x+button.width) and (button.y < mp_y < button.y+button.height)
+
+    def draw_selected(self, window, index_selected_button):
+        for index_button, button in enumerate(self.list_buttons):
+            if index_button == index_selected_button:
+                button.border = True
+                self.selected_button = button
+            else:
+                button.undraw(window=window)
+                button.border = False
+                button.draw(window=window)
+
+    def draw_hovered(self, window, index_hovered_button):
+        for index_button, button in enumerate(self.list_buttons):
+            if index_button == index_hovered_button:
+                button.border = True
+            elif button == self.selected_button:
+                button.border = True
+            else:
+                button.undraw(window=window)
+                button.border = False
+                button.draw(window=window)
 
 
 class Arrow:

@@ -17,9 +17,11 @@ class StartView(View):
 
         # Start button
         self.start_button = self.initializer.start_button
+        self.start_button.draw(window=self.window)
 
         # Question game
         self.question_games = self.initializer.question_games
+        self.question_games.draw(window=self.window)
 
         # Number games selection
         self.number_games_selection = self.initializer.number_games_selection
@@ -34,32 +36,24 @@ class StartView(View):
             self._quit_window()
 
         # Select a new number of games in the upcoming match
-        for index_button in range(len(self.number_games_selection.list_buttons)):
+        for index_button, button in enumerate(self.number_games_selection.list_buttons):
             if self.number_games_selection.is_under(mouse_position=self.mouse_position, index_button=index_button):
-                self.number_games_selection.list_buttons[index_button].border = True
-                self.number_games_selection.selected_button = index_button
+                self.number_games_selection.draw_selected(window=self.window,
+                                                          index_selected_button=index_button)
                 self.n_games = int(
                     self.number_games_selection.list_buttons[index_button].text)
-                self.number_games_selection.draw(window=self.window)
 
     def _mouse_over(self):
 
         # Hover over the number of games
         for index_button in range(len(self.number_games_selection.list_buttons)):
             if self.number_games_selection.is_under(mouse_position=self.mouse_position, index_button=index_button):
-                self.number_games_selection.list_buttons[index_button].border = True
-            elif self.number_games_selection.selected_button == index_button:
-                self.number_games_selection.list_buttons[index_button].border = True
-            else:
-                self.number_games_selection.list_buttons[index_button].border = False
-            self.number_games_selection.draw(window=self.window)
+                self.number_games_selection.draw_hovered(window=self.window,
+                                                         index_hovered_button=index_button)
 
     def _main_loop(self):
 
-        self._reset_screen()
         self.number_games_selection.draw(window=self.window)
-        self.start_button.draw(window=self.window)
-        self.question_games.draw(window=self.window)
 
         self.mouse_position = pygame.mouse.get_pos()
 
