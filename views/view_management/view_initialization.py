@@ -1,9 +1,10 @@
 import pygame
 
 from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons
+from objects.game_objects import Match, Game
 from objects.player_objects import Player
-from objects.game_objects import Game
 
+from config import set_counter_message
 from config import *
 
 
@@ -38,27 +39,18 @@ class Initializer:
                                                              height=NUMBER_GAMES_HEIGHT,
                                                              center=NUMBER_GAMES_CENTER)
 
-    def initialize_main_view(self, counter_message_text):
+    def initialize_main_view(self, match: Match):
 
-        self.counter_message_text = counter_message_text
+        self.match = match
+
+        self.counter_message_text = set_counter_message(game_number=self.match.game_number,
+                                                        n_games=self.match.n_games)
+
         # Initialize big square
         self.big_square = Square(tl=BIG_SQUARE_TL,
                                  tr=BIG_SQUARE_TR)
         # Initialize the grid
         self.grid = Grid(big_square=self.big_square)
-
-        # Initialize the two players
-        self.player_1 = Player(name='player_1',
-                               sign='cross',
-                               playing=True)
-        self.player_2 = Player(name='player_2',
-                               sign='circle',
-                               playing=False)
-
-        # Initialize the game
-        self.game = Game(player_1=self.player_1,
-                         player_2=self.player_2,
-                         playing_player=self.player_1)
 
         # Initialize message counter
         self.counter_message = RectangularButton(text=self.counter_message_text,
@@ -69,7 +61,7 @@ class Initializer:
                                                  height=COUNTER_MESSAGE_HEIGHT)
 
         # Initialize player 1 display
-        self.player_1_display = RectangularButton(text='player_1',
+        self.player_1_display = RectangularButton(text=self.match.player_1.name,
                                                   font=PLAYER_1_DISPLAY_FONT,
                                                   border=False,
                                                   center=PLAYER_1_DISPLAY_CENTER,
@@ -77,7 +69,7 @@ class Initializer:
                                                   height=PLAYER_1_DISPLAY_HEIGHT)
 
         # Initialize player 2 display
-        self.player_2_display = RectangularButton(text='player_2',
+        self.player_2_display = RectangularButton(text=self.match.player_2.name,
                                                   font=PLAYER_2_DISPLAY_FONT,
                                                   border=False,
                                                   center=PLAYER_2_DISPLAY_CENTER,
@@ -99,3 +91,25 @@ class Initializer:
                                                 center=RESTART_BUTTON_CENTER,
                                                 width=RESTART_BUTTON_WIDTH,
                                                 height=RESTART_BUTTON_HEIGHT)
+
+    def initialize_match(self, match_view):
+
+        # Initialize the two players
+        self.player_1 = Player(name='player_1',
+                               sign='cross',
+                               playing=True)
+        self.player_2 = Player(name='player_2',
+                               sign='circle',
+                               playing=False)
+
+        new_game = Game(player_1=self.player_1,
+                        player_2=self.player_2,
+                        playing_player=self.player_1)
+
+        match = Match(n_games=match_view.n_games,
+                      player_1=self.player_1,
+                      player_2=self.player_2)
+
+        match.list_games.append(new_game)
+
+        return match

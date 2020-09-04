@@ -8,7 +8,7 @@ class StartView(View):
     def __init__(self):
         self.active = True
         self.close_window = False
-        self.name = 'start_selection_view'
+        self.name = 'start_view'
 
         self.initializer = Initializer()
         self.initializer.initialize_start_view()

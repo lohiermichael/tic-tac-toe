@@ -49,8 +49,8 @@ COUNTER_MESSAGE_WIDTH = 200
 COUNTER_MESSAGE_HEIGHT = 100
 
 
-def set_counter_message(n_games):
-    return f'You are playing game 1/{n_games}'
+def set_counter_message(n_games, game_number):
+    return f'You are playing game {game_number}/{n_games}'
 
 
 # Player 1 display

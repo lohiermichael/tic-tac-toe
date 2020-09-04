@@ -43,6 +43,12 @@ class Match:
         self.n_games = n_games
         self.player_1 = player_1
         self.player_2 = player_2
+
+        self.game_number = 0
+        self.list_games = []
+
         # {'game_1': 'player_1', 'game_1': 'playing',
         #     'game_3': 'pending'}
         self.status_by_game = None
+
+        self.there_is_winner = False

@@ -3,22 +3,27 @@ import pygame
 from views.view_management.view_template import View
 from views.view_management.view_initialization import Initializer
 
+from objects.game_objects import Match
+
 
 class MainView(View):
-    def __init__(self, counter_message):
+    def __init__(self, match: Match):
+
+        self.match = match
+        self.game = match.list_games[-1]
+
         self.close_window = False
         self.active = True
 
         self.name = 'main_view'
 
         self.initializer = Initializer()
-        self.initializer.initialize_main_view(
-            counter_message_text=counter_message)
+        self.initializer.initialize_main_view(match=self.match)
 
         self.window = self.initializer.window
         self.big_square = self.initializer.big_square
+
         self.grid = self.initializer.grid
-        self.game = self.initializer.game
 
         # Counter message
         self.counter_message = self.initializer.counter_message
