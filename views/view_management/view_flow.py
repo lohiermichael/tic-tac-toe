@@ -52,14 +52,14 @@ class ViewFlow:
         assert self.current_view.name in ['start_view', 'main_view']
 
         if self.current_view.name == 'main_view':
-            self.current_match.game_number += 1
             # Update the match after the game is played
             self.current_match = self.current_view.match
             new_game = Game(player_1=self.current_match.player_1,
                             player_2=self.current_match.player_2,
-                            starting_player=self.current_match.choose_next_starting_player())  # TODO To test
+                            starting_player=self.current_match.choose_next_starting_player()) 
             self.current_match.list_games.append(new_game)
 
+        self.current_match.game_number += 1
         self.set_new_view(MainView(match=self.current_match))
 
     def display_final_view(self):

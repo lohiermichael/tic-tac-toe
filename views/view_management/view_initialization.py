@@ -112,7 +112,7 @@ class Initializer:
                       player_1=self.player_1,
                       player_2=self.player_2)
 
-        match.game_number += 1
         match.list_games.append(new_game)
+        match.game_number = 1
 
         return match
