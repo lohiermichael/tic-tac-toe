@@ -1,6 +1,6 @@
 import pygame
 
-from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons
+from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons, Arrow
 from objects.game_objects import Match, Game
 from objects.player_objects import Player
 
@@ -76,6 +76,10 @@ class Initializer:
                                                   width=PLAYER_2_DISPLAY_WIDTH,
                                                   height=PLAYER_2_DISPLAY_HEIGHT)
 
+        # Arrow images
+        self.player_1_arrow = Arrow(center=PLAYER_1_ARROW_CENTER)
+        self.player_2_arrow = Arrow(center=PLAYER_2_ARROW_CENTER)
+
     def initialize_final_view(self, final_message_text):
 
         self.final_message_text = final_message_text
@@ -95,9 +99,9 @@ class Initializer:
     def initialize_match(self, match_view):
 
         # Initialize the two players
-        self.player_1 = Player(name='player_1',
+        self.player_1 = Player(name='Player_1',
                                playing=True)
-        self.player_2 = Player(name='player_2',
+        self.player_2 = Player(name='Player_2',
                                playing=False)
 
         new_game = Game(player_1=self.player_1,

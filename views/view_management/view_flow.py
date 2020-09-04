@@ -28,7 +28,7 @@ class ViewFlow:
             # Condition to continue playing:
             # Condition 1 : the match still have some games to be played
             # Condition 2 : there is not a winner yet
-            while (self.current_match.game_number < self.current_match.n_games) and (not self.current_match.there_is_winner):
+            while (self.current_match.game_number <= self.current_match.n_games) and (not self.current_match.there_is_winner):
 
                 self.display_main_view()
 

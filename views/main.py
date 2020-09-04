@@ -33,8 +33,14 @@ class MainView(View):
         self.player_1_display = self.initializer.player_1_display
         self.player_1_display.draw(window=self.window)
 
+        self.player_1_arrow = self.initializer.player_1_arrow
+        self.player_1_arrow.draw(window=self.window)
+
         self.player_2_display = self.initializer.player_2_display
         self.player_2_display.draw(window=self.window)
+
+        self.player_2_arrow = self.initializer.player_2_arrow
+        self.player_2_arrow.draw(window=self.window)
 
         # Draw the grid
         self.grid.draw(window=self.window, line_width=2)

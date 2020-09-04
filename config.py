@@ -53,17 +53,25 @@ def set_counter_message(n_games, game_number):
     return f'You are playing game {game_number}/{n_games}'
 
 
+# Arrow image
+ARROW_IMAGE_PATH = './img/arrow.png'
+ARROW_DIMENSIONS = (50, 15)
+
 # Player 1 display
 PLAYER_1_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 PLAYER_1_DISPLAY_CENTER = (950, 300)
 PLAYER_1_DISPLAY_WIDTH = 100
 PLAYER_1_DISPLAY_HEIGHT = 50
+PLAYER_1_ARROW_CENTER = (
+    PLAYER_1_DISPLAY_CENTER[0] - 75, PLAYER_1_DISPLAY_CENTER[1])
 
 # Player 2 display
 PLAYER_2_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 PLAYER_2_DISPLAY_CENTER = (950, 500)
 PLAYER_2_DISPLAY_WIDTH = 100
 PLAYER_2_DISPLAY_HEIGHT = 50
+PLAYER_2_ARROW_CENTER = (
+    PLAYER_2_DISPLAY_CENTER[0] - 75, PLAYER_2_DISPLAY_CENTER[1])
 
 
 ################################## FINAL VIEW #####################################

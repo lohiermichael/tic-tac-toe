@@ -287,3 +287,19 @@ class CollectionRadioButtons:
         button = self.list_buttons[index_button]
         mp_x, mp_y = mouse_position
         return (button.x < mp_x < button.x+button.width) and (button.y < mp_y < button.y+button.height)
+
+
+class Arrow:
+    def __init__(self, center):
+        self.image = pygame.image.load(ARROW_IMAGE_PATH)
+        self.image = pygame.transform.scale(self.image, ARROW_DIMENSIONS)
+
+        self.width, self.height = ARROW_DIMENSIONS
+        self.center = center
+        self.c_x, self.c_y = self.center
+
+        self.x = self.c_x - int(self.width/2)
+        self.y = self.c_y - int(self.height/2)
+
+    def draw(self, window):
+        window.blit(self.image, (self.x, self.y))
