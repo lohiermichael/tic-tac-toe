@@ -7,7 +7,7 @@ from objects.game_objects import Game
 from config import *
 
 
-class Initializer:
+class ViewInitializer:
     def __init__(self):
 
         self._initialize_window()
@@ -99,3 +99,5 @@ class Initializer:
                                                 center=RESTART_BUTTON_CENTER,
                                                 width=RESTART_BUTTON_WIDTH,
                                                 height=RESTART_BUTTON_HEIGHT)
+
+

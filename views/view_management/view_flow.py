@@ -1,6 +1,7 @@
 import pygame
+from initialization.game_object import GameObejectIn
 
-from views.view_management.view_initialization import Initializer
+
 from views.start import StartView
 from views.main import MainView
 from views.final import FinalView
