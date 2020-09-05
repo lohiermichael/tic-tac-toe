@@ -134,4 +134,4 @@ FINAL_MESSAGE_TIE = 'It is a tie'
 
 
 def set_final_message_win(winner_name):
-    return f'{winner_name} won the game'
+    return f'{winner_name} won the match'

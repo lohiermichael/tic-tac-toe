@@ -13,6 +13,8 @@ class Player:
         self.playing = playing
         self.color = color
 
+        self.match_score = 0
+
     def play(self, window, in_grid: Grid, on_square: Square):
         i, j = on_square
         if self.sign == 'cross':

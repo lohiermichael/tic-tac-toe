@@ -62,7 +62,7 @@ class MainView(View):
 
             # Test end of the game
 
-            # First: check one player has not won
+            # First: check if one player has not won
             if self.grid.there_is_a_winner() != 'not':
                 self.game.won = True
                 self.game.winner = self.game.playing_player

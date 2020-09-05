@@ -37,6 +37,7 @@ class ViewFlow:
                 if self.current_view.close_window:
                     return
 
+            self.current_match.set_final_results()
 
             self.display_final_view()
             if self.current_view.close_window:
@@ -68,11 +69,11 @@ class ViewFlow:
 
     def display_final_view(self):
         assert self.current_view.name == 'main_view'
-        if self.current_view.game.won:
-            winner_name = self.current_view.game.winner.name
+        if self.current_match.won:
+            winner_name = self.current_match.winner.name
             self.set_new_view(
                 FinalView(final_message=set_final_message_win(winner_name)))
-        elif self.current_view.game.tied:
+        elif self.current_match.tied:
             self.set_new_view(FinalView(final_message=FINAL_MESSAGE_TIE))
 
     def set_new_view(self, new_view):
