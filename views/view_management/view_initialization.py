@@ -20,11 +20,17 @@ class Initializer:
         return self.window
 
     def initialize_start_view(self):
-        self.start_button = RectangularButton(text=START_BUTTON_TEXT,
-                                              font=START_BUTTON_FONT,
-                                              center=START_BUTTON_CENTER,
-                                              width=START_BUTTON_WIDTH,
-                                              height=START_BUTTON_HEIGHT)
+
+        self.game_title = RectangularButton(text=GAME_NAME,
+                                            font=GAME_TITLE_FONT,
+                                            border=False,
+                                            center=GAME_TITLE_CENTER,
+                                            width=GAME_TITLE_WIDTH,
+                                            height=GAME_TITLE_HEIGHT)
+
+        self.game_logo = Image(center=GAME_LOGO_CENTER,
+                               image_path=GAME_LOGO_IMAGE_PATH,
+                               image_dimensions=GAME_LOGO_DIMENSIONS)
 
         self.question_games = RectangularButton(text=QUESTION_GAMES_TEXT,
                                                 font=QUESTION_GAMES_FONT,
@@ -38,6 +44,12 @@ class Initializer:
                                                              width=NUMBER_GAMES_WIDTH,
                                                              height=NUMBER_GAMES_HEIGHT,
                                                              center=NUMBER_GAMES_CENTER)
+
+        self.start_button = RectangularButton(text=START_BUTTON_TEXT,
+                                              font=START_BUTTON_FONT,
+                                              center=START_BUTTON_CENTER,
+                                              width=START_BUTTON_WIDTH,
+                                              height=START_BUTTON_HEIGHT)
 
     def initialize_main_view(self, match: Match):
 

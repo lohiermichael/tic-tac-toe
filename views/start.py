@@ -15,6 +15,14 @@ class StartView(View):
 
         self.window = self.initializer.window
 
+        # Game title
+        self.game_title = self.initializer.game_title
+        self.game_title.draw(window=self.window)
+
+        # Game logo
+        self.game_logo = self.initializer.game_logo
+        self.game_logo.draw(window=self.window)
+
         # Start button
         self.start_button = self.initializer.start_button
         self.start_button.draw(window=self.window)

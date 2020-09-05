@@ -2,8 +2,6 @@ import pygame
 
 pygame.font.init()
 
-GAME_NAME = 'Tic Tac Toe'
-
 
 # Window size
 WINDOW_WIDTH = 1200
@@ -27,12 +25,30 @@ COLOR_DISPLAY_PLAYER_1_IMAGE_PATH = './img/color_display_player_1.png'
 COLOR_DISPLAY_PLAYER_2_IMAGE_PATH = './img/color_display_player_2.png'
 COLOR_DISPLAY_DIMENSIONS = (60, 50)
 
+# Game logo
+GAME_LOGO_IMAGE_PATH = './img/logo.png'
+GAME_LOGO_DIMENSIONS = (100, 100)
+
+
 ############################## START SELECTION VIEW ###############################
+
+
+# Game title
+
+GAME_NAME = 'Tic Tac Toe'
+GAME_TITLE_FONT = pygame.font.SysFont('Comic Sans MS', 100)
+GAME_TITLE_CENTER = (5.5*int(WINDOW_WIDTH/10), int((2/10)*WINDOW_HEIGHT))
+GAME_TITLE_WIDTH = 500
+GAME_TITLE_HEIGHT = 100
+
+# Game logo
+GAME_LOGO_CENTER = (3.5*int(WINDOW_WIDTH/10), int((2/10)*WINDOW_HEIGHT))
+
 
 # Question on the number of games to play
 QUESTION_GAMES_TEXT = 'Choose how many games you want to play...'
 QUESTION_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 40)
-QUESTION_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((4/10)*WINDOW_HEIGHT))
+QUESTION_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((5/10)*WINDOW_HEIGHT))
 QUESTION_GAMES_WIDTH = 600
 QUESTION_GAMES_HEIGHT = 50
 
@@ -42,7 +58,7 @@ NUMBER_GAMES_COLLECTION = ['1', '3', '5']
 NUMBER_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 NUMBER_GAMES_WIDTH = 150
 NUMBER_GAMES_HEIGHT = 50
-NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((5/10)*WINDOW_HEIGHT))
+NUMBER_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((6/10)*WINDOW_HEIGHT))
 
 # Start button
 START_BUTTON_TEXT = 'Start playing'
@@ -95,7 +111,7 @@ PLAYER_2_COLOR_DISPLAY_CENTER = (
 
 
 # Game summary
-GAME_SUMMARY_CENTER = (900, 150)
+GAME_SUMMARY_CENTER = (800, 150)
 GAME_SUMMARY_HEIGHT = 70
 GAME_SIZE = 40
 
