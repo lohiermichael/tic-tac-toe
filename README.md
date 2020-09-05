@@ -12,5 +12,11 @@ Run the game:
 
 ```python run.py```
 
+<br>
 
-![](./img/video_animation.mov)
+## Animation
+
+<br>
+
+
+![](img/video_animation.gif)
