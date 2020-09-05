@@ -42,21 +42,21 @@ class Square:
         mp_x, mp_y = mouse_position
         return (self.tl_x < mp_x < self.tr_x) and (self.tl_y < mp_y < self.bl_y)
 
-    def change_state(self, window, new_state):
+    def change_state(self, window, new_state, color):
 
         self.state = new_state
 
         if self.state == 'circle':
             #  Draw a circle in the square
             Circle(center=self.center,
-                   radius=int(self.size/4)).draw(window=window)
+                   radius=int(self.size/4), color=color).draw(window=window)
 
         elif self.state == 'cross':
             # Draw a cross in the square
             cross_tl = (self.tl_x + int(self.size/4),
                         self.tl_y + int(self.size/4))
             Cross(tl=cross_tl,
-                  size=int(self.size/2)).draw(window=window)
+                  size=int(self.size/2), color=color).draw(window=window)
 
 
 class Grid(list):
@@ -150,7 +150,7 @@ class Circle:
         self.radius = radius
         self.color = color
 
-    def draw(self, window, line_width=1):
+    def draw(self, window, line_width=2):
         pygame.draw.circle(window, self.color,
                            self.center, self.radius, line_width)
 
@@ -180,7 +180,7 @@ class Cross:
         self.br_y = self.tr_y + size
         self.br = self.br_x, self.br_y
 
-    def draw(self, window, line_width=1):
+    def draw(self, window, line_width=2):
         """Draw two crossing diagonal lines"""
 
         pygame.draw.line(window, self.color, self.tl, self.br, line_width)

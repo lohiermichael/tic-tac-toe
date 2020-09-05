@@ -19,7 +19,9 @@ class Player:
         i, j = on_square
         if self.sign == 'cross':
             # Draw a cross
-            in_grid[i][j].change_state(window=window, new_state='cross')
+            in_grid[i][j].change_state(
+                window=window, new_state='cross', color=self.color)
         elif self.sign == 'circle':
             # Draw a circle
-            in_grid[i][j].change_state(window=window, new_state='circle')
+            in_grid[i][j].change_state(
+                window=window, new_state='circle', color=self.color)
