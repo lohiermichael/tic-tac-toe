@@ -11,3 +11,6 @@ Install the dependencies:
 Run the game:
 
 ```python run.py```
+
+
+![](./img/video_animation.mov)
