@@ -1,3 +1,5 @@
+from time import sleep
+
 import pygame
 
 from views.view_management.view_initialization import Initializer
@@ -28,12 +30,13 @@ class ViewFlow:
             # Condition to continue playing:
             # Condition 1 : the match still have some games to be played
             # Condition 2 : there is not a winner yet
-            while (self.current_match.game_number <= self.current_match.n_games) and (not self.current_match.there_is_winner):
+            while (self.current_match.game_number <= self.current_match.n_games):
 
                 self.display_main_view()
 
                 if self.current_view.close_window:
                     return
+
 
             self.display_final_view()
             if self.current_view.close_window:
@@ -56,11 +59,12 @@ class ViewFlow:
             self.current_match = self.current_view.match
             new_game = Game(player_1=self.current_match.player_1,
                             player_2=self.current_match.player_2,
-                            starting_player=self.current_match.choose_next_starting_player()) 
+                            starting_player=self.current_match.choose_next_starting_player())
             self.current_match.list_games.append(new_game)
 
-        self.current_match.game_number += 1
         self.set_new_view(MainView(match=self.current_match))
+
+        self.current_match.game_number += 1
 
     def display_final_view(self):
         assert self.current_view.name == 'main_view'

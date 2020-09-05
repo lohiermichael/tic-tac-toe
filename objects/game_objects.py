@@ -1,5 +1,7 @@
 from objects.player_objects import Player
 
+from config import *
+
 
 class Game:
     def __init__(self,
@@ -15,6 +17,7 @@ class Game:
         self.playing_player = starting_player
 
         self._define_players_signs()
+        self._define_player_colors()
 
         self.won = False
         self.winner = None
@@ -41,6 +44,10 @@ class Game:
             self.player_2.sign = 'cross'
             self.player_1.sign = 'circle'
 
+    def _define_player_colors(self):
+        self.player_1.color = RED
+        self.player_2.color = GREEN
+
 
 class Match:
     def __init__(self,
@@ -58,8 +65,6 @@ class Match:
         # {'game_1': 'player_1', 'game_1': 'playing',
         #     'game_3': 'pending'}
         self.status_by_game = None
-
-        self.there_is_winner = False
 
     def choose_next_starting_player(self):
         assert self.list_games, "One game needs to be played"

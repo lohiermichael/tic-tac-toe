@@ -29,16 +29,26 @@ class MainView(View):
         self.counter_message = self.initializer.counter_message
         self.counter_message.draw(window=self.window)
 
-        # Display players
+        # Player 1
         self.player_1_display = self.initializer.player_1_display
         self.player_1_display.draw(window=self.window)
 
         self.player_1_arrow = self.initializer.player_1_arrow
 
+        self.player_1_color_display = self.initializer.player_1_color_display
+        self.player_1_color_display.draw(window=self.window)
+
+        # Player 2
         self.player_2_display = self.initializer.player_2_display
         self.player_2_display.draw(window=self.window)
 
         self.player_2_arrow = self.initializer.player_2_arrow
+
+        self.player_2_color_display = self.initializer.player_2_color_display
+        self.player_2_color_display.draw(window=self.window)
+
+        # Game summary
+        self.game_summary = self.initializer.game_summary
 
         # Draw the grid
         self.grid.draw(window=self.window, line_width=2)
@@ -73,6 +83,7 @@ class MainView(View):
 
     # Override
     def _main_loop(self):
+        self.game_summary.draw(window=self.window)
 
         if self.game.playing_player.name == 'Player_1':
             self.player_1_arrow.draw(window=self.window)

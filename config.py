@@ -4,6 +4,7 @@ pygame.font.init()
 
 GAME_NAME = 'Tic Tac Toe'
 
+
 # Window size
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
@@ -12,10 +13,23 @@ WINDOW_CENTER = (int(WINDOW_WIDTH/2), int(WINDOW_HEIGHT/2))
 # Colors
 GREY = (247, 247, 247)
 BLACK = (0, 0, 0)
+RED = (254, 30, 30)
+GREEN = (30, 91, 54)
+
+# Images
+
+# Arrow
+ARROW_IMAGE_PATH = './img/arrow.png'
+ARROW_DIMENSIONS = (50, 15)
+
+# Color display
+COLOR_DISPLAY_PLAYER_1_IMAGE_PATH = './img/color_display_player_1.png'
+COLOR_DISPLAY_PLAYER_2_IMAGE_PATH = './img/color_display_player_2.png'
+COLOR_DISPLAY_DIMENSIONS = (60, 50)
 
 ############################## START SELECTION VIEW ###############################
 
-
+# Question on the number of games to play
 QUESTION_GAMES_TEXT = 'Choose how many games you want to play...'
 QUESTION_GAMES_FONT = pygame.font.SysFont('Comic Sans MS', 40)
 QUESTION_GAMES_CENTER = (int(WINDOW_WIDTH/2), int((4/10)*WINDOW_HEIGHT))
@@ -55,25 +69,35 @@ def set_counter_message(n_games, game_number):
     return f'You are playing game {game_number}/{n_games}'
 
 
-# Arrow image
-ARROW_IMAGE_PATH = './img/arrow.png'
-ARROW_DIMENSIONS = (50, 15)
-
 # Player 1 display
 PLAYER_1_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
 PLAYER_1_DISPLAY_CENTER = (950, 300)
 PLAYER_1_DISPLAY_WIDTH = 100
 PLAYER_1_DISPLAY_HEIGHT = 50
+
 PLAYER_1_ARROW_CENTER = (
     PLAYER_1_DISPLAY_CENTER[0] - 75, PLAYER_1_DISPLAY_CENTER[1])
 
+PLAYER_1_COLOR_DISPLAY_CENTER = (
+    PLAYER_1_DISPLAY_CENTER[0] + 90, PLAYER_1_DISPLAY_CENTER[1])
+
 # Player 2 display
 PLAYER_2_DISPLAY_FONT = pygame.font.SysFont('Comic Sans MS', 30)
-PLAYER_2_DISPLAY_CENTER = (950, 500)
+PLAYER_2_DISPLAY_CENTER = (950, 350)
 PLAYER_2_DISPLAY_WIDTH = 100
 PLAYER_2_DISPLAY_HEIGHT = 50
+
 PLAYER_2_ARROW_CENTER = (
     PLAYER_2_DISPLAY_CENTER[0] - 75, PLAYER_2_DISPLAY_CENTER[1])
+
+PLAYER_2_COLOR_DISPLAY_CENTER = (
+    PLAYER_2_DISPLAY_CENTER[0] + 90, PLAYER_2_DISPLAY_CENTER[1])
+
+
+# Game summary
+GAME_SUMMARY_CENTER = (900, 150)
+GAME_SUMMARY_HEIGHT = 70
+GAME_SIZE = 40
 
 
 ################################## FINAL VIEW #####################################

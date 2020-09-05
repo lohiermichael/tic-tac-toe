@@ -188,7 +188,7 @@ class Cross:
 
 
 class RectangularButton():
-    def __init__(self, font, color=BLACK, center=None, border=True, x=None, y=None, height=None, width=None, text=''):
+    def __init__(self, font=None, color=BLACK, center=None, border=True, x=None, y=None, height=None, width=None, text=''):
         self.color = color
         self.font = font
         self.border = border
@@ -212,10 +212,11 @@ class RectangularButton():
 
         self.text = text
 
-    def draw(self, window, outline=True, outline_thinkness=2):
+    def draw(self, window, outline=True, outline_thinkness=2, line_width=None):
         """Call this method to draw a button on the screen"""
 
-        line_width = 1 if self.border else -1
+        if not line_width:
+            line_width = 1 if self.border else -1
 
         if outline:
             pygame.draw.rect(window, outline, (self.x-outline_thinkness,
@@ -316,13 +317,13 @@ class CollectionRadioButtons:
                 button.draw(window=window)
 
 
-class Arrow:
-    def __init__(self, center):
+class Image:
+    def __init__(self, center, image_path, image_dimensions):
 
-        self.image = pygame.image.load(ARROW_IMAGE_PATH)
-        self.image = pygame.transform.scale(self.image, ARROW_DIMENSIONS)
+        self.image = pygame.image.load(image_path)
+        self.image = pygame.transform.scale(self.image, image_dimensions)
 
-        self.width, self.height = ARROW_DIMENSIONS
+        self.width, self.height = image_dimensions
         self.center = center
         self.c_x, self.c_y = self.center
 
@@ -337,3 +338,78 @@ class Arrow:
                                         self.y,
                                         self.width,
                                         self.height), 0)
+
+
+class GameStatus:
+    def __init__(self, match, index_game, x, y, size):
+        self.match = match
+        self.index_game = index_game
+
+        self.x = x
+        self.y = y
+
+        # Size of the square
+        self.size = size
+
+    def draw(self, window):
+
+        if self.index_game < len(self.match.list_games):
+            game = self.match.list_games[self.index_game]
+
+            if game.tied:
+                player_1_color = game.player_1.color
+
+                pygame.draw.polygon(window, player_1_color,
+                                    ((self.x, self.y),
+                                     (self.x, self.y+self.size),
+                                     (self.x+self.size, self.y+self.size)), 0)
+
+                player_2_color = game.player_2.color
+
+                pygame.draw.polygon(window, player_2_color,
+                                    ((self.x, self.y),
+                                     (self.x+self.size, self.y),
+                                     (self.x+self.size, self.y+self.size)), 0)
+
+            elif game.won:
+                winner_color = game.winner.color
+
+                pygame.draw.rect(window, winner_color, (self.x,
+                                                        self.y,
+                                                        self.size,
+                                                        self.size), 0)
+
+            else:
+
+                self._draw_empty_square(window=window)
+
+        else:
+
+            self._draw_empty_square(window=window)
+
+    def _draw_empty_square(self, window):
+        pygame.draw.rect(window, BLACK, (self.x,
+                                         self.y,
+                                         self.size,
+                                         self.size), 1)
+
+
+class GamesSummary:
+    def __init__(self, match, center, game_size):
+
+        self.match = match
+        self.game_size = game_size
+        self.center = center
+        self.c_x, self.c_y = self.center
+
+        self.x = self.c_x - int(self.game_size/2)
+        self.y = self.c_y - int(self.game_size/2)
+
+    def draw(self, window):
+
+        for index_game in range(self.match.n_games):
+            GameStatus(match=self.match,
+                       index_game=index_game,
+                       x=self.x + int(1.5*index_game*self.game_size),
+                       y=self.y,
+                       size=self.game_size).draw(window=window)

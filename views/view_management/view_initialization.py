@@ -1,6 +1,6 @@
 import pygame
 
-from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons, Arrow
+from objects.visual_objects import Square, Grid, RectangularButton, CollectionRadioButtons, Image, GamesSummary
 from objects.game_objects import Match, Game
 from objects.player_objects import Player
 
@@ -60,25 +60,38 @@ class Initializer:
                                                  width=COUNTER_MESSAGE_WIDTH,
                                                  height=COUNTER_MESSAGE_HEIGHT)
 
-        # Initialize player 1 display
+        # Player 1
+        self.player_1_arrow = Image(center=PLAYER_1_ARROW_CENTER,
+                                    image_path=ARROW_IMAGE_PATH,
+                                    image_dimensions=ARROW_DIMENSIONS)
         self.player_1_display = RectangularButton(text=self.match.player_1.name,
                                                   font=PLAYER_1_DISPLAY_FONT,
                                                   border=False,
                                                   center=PLAYER_1_DISPLAY_CENTER,
                                                   width=PLAYER_1_DISPLAY_WIDTH,
                                                   height=PLAYER_1_DISPLAY_HEIGHT)
+        self.player_1_color_display = Image(center=PLAYER_1_COLOR_DISPLAY_CENTER,
+                                            image_path=COLOR_DISPLAY_PLAYER_1_IMAGE_PATH,
+                                            image_dimensions=COLOR_DISPLAY_DIMENSIONS)
 
-        # Initialize player 2 display
+        # Player 2
+        self.player_2_arrow = Image(center=PLAYER_2_ARROW_CENTER,
+                                    image_path=ARROW_IMAGE_PATH,
+                                    image_dimensions=ARROW_DIMENSIONS)
         self.player_2_display = RectangularButton(text=self.match.player_2.name,
                                                   font=PLAYER_2_DISPLAY_FONT,
                                                   border=False,
                                                   center=PLAYER_2_DISPLAY_CENTER,
                                                   width=PLAYER_2_DISPLAY_WIDTH,
                                                   height=PLAYER_2_DISPLAY_HEIGHT)
+        self.player_2_color_display = Image(center=PLAYER_2_COLOR_DISPLAY_CENTER,
+                                            image_path=COLOR_DISPLAY_PLAYER_2_IMAGE_PATH,
+                                            image_dimensions=COLOR_DISPLAY_DIMENSIONS)
 
-        # Arrow images
-        self.player_1_arrow = Arrow(center=PLAYER_1_ARROW_CENTER)
-        self.player_2_arrow = Arrow(center=PLAYER_2_ARROW_CENTER)
+        # Game summary
+        self.game_summary = GamesSummary(match=match,
+                                         center=GAME_SUMMARY_CENTER,
+                                         game_size=GAME_SIZE)
 
     def initialize_final_view(self, final_message_text):
 
@@ -113,6 +126,6 @@ class Initializer:
                       player_2=self.player_2)
 
         match.list_games.append(new_game)
-        match.game_number = 1
+        match.game_number += 1
 
         return match

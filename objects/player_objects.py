@@ -5,11 +5,13 @@ class Player:
     def __init__(self,
                  name: str,
                  sign: str = None,
+                 color=None,
                  playing: bool = None):
 
         self.name = name
         self.sign = sign
         self.playing = playing
+        self.color = color
 
     def play(self, window, in_grid: Grid, on_square: Square):
         i, j = on_square
